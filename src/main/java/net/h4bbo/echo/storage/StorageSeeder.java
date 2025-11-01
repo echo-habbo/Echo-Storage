@@ -46,8 +46,16 @@ public class StorageSeeder {
             room = new RoomData();
             room.setName("Cafe Ole");
             room.setDescription("cafe_ole");
-            room.setModel("cafe_ole");
+            room.setModel("taivas_cafe");
             room.setCcts("hh_room_cafe");
+            room.setCategoryId(3);
+            storageContext.insert(room);
+
+            room = new RoomData();
+            room.setName("Theatredome");
+            room.setDescription("theatredrome");
+            room.setModel("theater");
+            room.setCcts("hh_room_theater");
             room.setCategoryId(3);
             storageContext.insert(room);
 
