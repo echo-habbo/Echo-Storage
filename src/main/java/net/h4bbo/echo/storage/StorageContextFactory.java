@@ -1,5 +1,9 @@
 package net.h4bbo.echo.storage;
 
+import net.h4bbo.echo.storage.seeding.StorageSeeder;
+import net.h4bbo.echo.storage.seeding.providers.NavigatorCategorySeedProvider;
+import net.h4bbo.echo.storage.seeding.providers.RoomSeedProvider;
+import net.h4bbo.echo.storage.seeding.providers.UserSeedProvider;
 import org.oldskooler.simplelogger4j.SimpleLog;
 
 import java.io.File;
@@ -16,6 +20,11 @@ public class StorageContextFactory {
 
         if (!isSeeded) {
             isSeeded = true;
+
+            StorageSeeder.register(new UserSeedProvider());
+            StorageSeeder.register(new NavigatorCategorySeedProvider());
+            StorageSeeder.register(new RoomSeedProvider());
+
             StorageSeeder.init(ctx);
         }
 
