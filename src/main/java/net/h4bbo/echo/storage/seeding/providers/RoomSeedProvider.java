@@ -19,7 +19,7 @@ public class RoomSeedProvider extends SeedProvider<RoomData> {
         room.setDescription("welcome_lounge");
         room.setModel("newbie_lobby");
         room.setCcts("hh_room_nlobby");
-        room.setVisitorsNow(0);
+        room.setVisitorsNow(2);
         room.setVisitorsMax(25);
         room.setCategoryId(3);
         context.insert(room);
@@ -38,18 +38,32 @@ public class RoomSeedProvider extends SeedProvider<RoomData> {
         room.setDescription("theatredrome");
         room.setModel("theater");
         room.setCcts("hh_room_theater");
+        room.setVisitorsNow(0);
         room.setCategoryId(3);
         context.insert(room);
 
         room = new RoomData();
         room.setName("Habbo Lido");
         room.setDescription("habbo_lido");
+        room.setVisitorsNow(0);
         room.setModel("pool_a");
         room.setCcts("hh_room_pool,hh_people_pool");
-        room.setVisitorsNow(0);
         room.setVisitorsMax(25);
         room.setCategoryId(5);
         context.insert(room);
+
+
+        room = new RoomData();
+        room.setName("Habbo Lido II");
+        room.setDescription("habbo_lido");
+        room.setVisitorsNow(0);
+        room.setModel("pool_b");
+        room.setCcts("hh_room_pool,hh_people_pool");
+        room.setVisitorsMax(25);
+        room.setCategoryId(5);
+        context.insert(room);
+
+
 
         room = new RoomData();
         room.setName("Alex's Room");
