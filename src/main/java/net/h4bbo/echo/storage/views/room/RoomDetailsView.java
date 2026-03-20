@@ -1,23 +1,19 @@
-package net.h4bbo.echo.storage.models.room;
+package net.h4bbo.echo.storage.views.room;
 
 import io.netty.util.AttributeKey;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.oldskooler.entity4j.annotations.Column;
 import org.oldskooler.entity4j.annotations.Entity;
 import org.oldskooler.entity4j.annotations.Id;
-import org.oldskooler.entity4j.annotations.NotMapped;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-@Entity(table = "rooms")
+@Entity(table = "vw_room_details")
 @ToString
 @EqualsAndHashCode
-public class RoomData {
-    public static final AttributeKey<RoomData> DATA_KEY = AttributeKey.valueOf(RoomData.class.getCanonicalName());
+public class RoomDetailsView {
+    public static final AttributeKey<RoomDetailsView> DATA_KEY = AttributeKey.valueOf(RoomDetailsView.class.getCanonicalName());
+
     @Getter
     @Id(auto = true)
     private int id;
@@ -36,6 +32,11 @@ public class RoomData {
     @Setter
     @Column(name = "name", nullable = false, defaultValue = "''")
     private String name;
+
+    @Getter
+    @Setter
+    @Column(name = "owner_name", ignore = true)
+    private String ownerName;
 
     @Getter
     @Setter
@@ -66,5 +67,4 @@ public class RoomData {
     @Setter
     @Column(name = "created_at", nullable = false, defaultValue = "(CURRENT_TIMESTAMP)")
     private LocalDateTime createdAt;
-
 }

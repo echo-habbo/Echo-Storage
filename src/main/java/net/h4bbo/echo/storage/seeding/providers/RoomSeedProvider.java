@@ -2,7 +2,9 @@ package net.h4bbo.echo.storage.seeding.providers;
 
 import net.h4bbo.echo.storage.StorageContext;
 import net.h4bbo.echo.storage.models.room.RoomData;
+import net.h4bbo.echo.storage.models.user.UserData;
 import net.h4bbo.echo.storage.seeding.SeedProvider;
+import net.h4bbo.echo.storage.views.room.RoomDetailsView;
 
 public class RoomSeedProvider extends SeedProvider<RoomData> {
     @Override
@@ -13,6 +15,15 @@ public class RoomSeedProvider extends SeedProvider<RoomData> {
     @Override
     public void seed(StorageContext context) throws Exception {
         RoomData room;
+
+        context.dropViewIfExists("vw_room_details");
+
+        context.createView("vw_room_details", context.from(RoomData.class).as("r")
+                .select(s -> s
+                        .all(RoomData.class)
+                        .col(UserData.class, UserData::getName).as("owner_name"))
+                .leftJoin(UserData.class, "u", on ->
+                        on.eq(RoomData::getOwnerId, UserData::getId)));
 
         room = new RoomData();
         room.setName("Welcome Lounge");
@@ -54,7 +65,6 @@ public class RoomSeedProvider extends SeedProvider<RoomData> {
         room.setCategoryId(5);
         context.insert(room);
 
-
         room = new RoomData();
         room.setName("Habbo Lido II");
         room.setDescription("habbo_lido");
@@ -64,8 +74,6 @@ public class RoomSeedProvider extends SeedProvider<RoomData> {
         room.setVisitorsMax(25);
         room.setCategoryId(5);
         context.insert(room);
-
-
 
         room = new RoomData();
         room.setName("Alex's Room");
@@ -86,5 +94,9 @@ public class RoomSeedProvider extends SeedProvider<RoomData> {
         room.setCategoryId(7);
         room.setOwnerId(1);
         context.insert(room);
+
+        var rooms = context.from(RoomDetailsView.class).toList();
+
+        System.out.println("Rooms: " + rooms);
     }
 }
